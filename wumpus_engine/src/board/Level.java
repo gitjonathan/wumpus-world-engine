@@ -8,6 +8,7 @@ import percept.Percept;
 
 import api.WumpusEngineSendable;
 import board.Square.EmptySquare;
+import board.Square.PitSquare;
 import board.Square.Square;
 import board.Square.SquarePosition;
 
@@ -81,9 +82,9 @@ public class Level implements WumpusEngineSendable{
 	}
 	
 	public static Level generateEmptyLevel(int level, Size size, int numPits) {
-		//TODO(WPH) - add pits
-//		Random randX = new Random();
-//		Random randY = new Random();
+		
+		Random randX = new Random();
+		Random randY = new Random();
 		
 		Square[][] squares = new Square[size.getY()][size.getX()];
 		
@@ -93,6 +94,13 @@ public class Level implements WumpusEngineSendable{
 				squares[x][y] = new EmptySquare(new SquarePosition(x, y));
 			}
 		}
+		
+		// Initialize board with EmptySquares
+		for (int x = 0; x < squares.length; ++x) {
+			for (int y = 0; y < squares[x].length; ++y) {
+				squares[x][y] = new EmptySquare(new SquarePosition(x, y));
+			}
+		}		
 		
 		Level randomLevel = new Level(level, size, squares);
 		
@@ -119,6 +127,8 @@ public class Level implements WumpusEngineSendable{
 		}
 		output += "\n";
 		output += delimiter;
+		output += "\n";
+		output += "\n";
 		
 		return output;
 	}

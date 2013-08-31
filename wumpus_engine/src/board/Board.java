@@ -5,6 +5,7 @@ import java.util.Random;
 import org.codehaus.jettison.json.JSONObject;
 
 import board.Square.GoldSquare;
+import board.Square.PitSquare;
 import board.Square.SquarePosition;
 import board.Square.WumpusSquare;
 
@@ -20,10 +21,14 @@ public class Board implements WumpusEngineSendable {
 		this.size = size;
 
 		levels = new Level[numLevels];
-		int numPits = 0;// TODO(WPH): add pits
+		int numPitsPerLevel = 5;// TODO(WPH): how man pits?
 		
 		for (int levelIndex = 0; levelIndex < numLevels; ++levelIndex) {
-			levels[levelIndex] = Level.generateEmptyLevel(levelIndex, size, numPits);
+			levels[levelIndex] = Level.generateEmptyLevel(levelIndex, size, numPitsPerLevel);
+
+			for (int pitCount = 0; pitCount < numPitsPerLevel; ++pitCount) {
+				levels[levelIndex].addSpecialSquareToLevel(new PitSquare());
+			}
 		}
 		
 		Random randLevel = new Random();
