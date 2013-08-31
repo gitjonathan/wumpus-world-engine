@@ -12,6 +12,10 @@ public class WumpusSquare extends Square {
 		super(position);
 	}
 
+	public WumpusSquare() {
+		super();
+	}
+
 	@Override
 	public JSONObject toJSON() {
 		// TODO Auto-generated method stub

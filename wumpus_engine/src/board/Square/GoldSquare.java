@@ -11,7 +11,10 @@ public class GoldSquare extends Square implements WumpusEngineSendable {
 
 	public GoldSquare(SquarePosition position) {
 		super(position);
-		// TODO Auto-generated constructor stub
+	}	
+
+	public GoldSquare() {
+		super();
 	}
 
 	@Override

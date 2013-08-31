@@ -14,6 +14,14 @@ public abstract class Square implements WumpusEngineSendable {
 		percepts = new ArrayList<Percept>();
 	}
 	
+	public Square() {
+		percepts = new ArrayList<Percept>();
+	}
+	
+	public void setPosition(SquarePosition position) {
+		this.position = position;
+	}
+	
 	public ArrayList<Percept> getPercepts() {
 		return percepts;
 	}

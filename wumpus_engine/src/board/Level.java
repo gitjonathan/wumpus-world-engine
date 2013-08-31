@@ -8,10 +8,8 @@ import percept.Percept;
 
 import api.WumpusEngineSendable;
 import board.Square.EmptySquare;
-import board.Square.GoldSquare;
 import board.Square.Square;
 import board.Square.SquarePosition;
-import board.Square.WumpusSquare;
 
 public class Level implements WumpusEngineSendable{
 	private int level;
@@ -22,8 +20,6 @@ public class Level implements WumpusEngineSendable{
 		this.level   = level;
 		this.size    = size;
 		this.squares = squares;
-		
-		generatePercepts();
 	}
 	
 	public int getLevel() {
@@ -41,7 +37,7 @@ public class Level implements WumpusEngineSendable{
 		return squares[position.getX()][position.getY()];
 	}
 	
-	private void generatePercepts() {
+	public void generatePercepts() {
 		for (int x = 0; x < squares.length; ++x) {
 			for (int y = 0; y < squares[x].length; ++y) {
 				generatePercepts(squares[x][y]);
@@ -70,12 +66,24 @@ public class Level implements WumpusEngineSendable{
 		}
 	}
 	
-	public static Level generateRandomLevel(int level, Size size) {
-		//TODO(WPH): build random squares (following rules in book)
-		//TODO(WPH):
-		
+	public void addSpecialSquareToLevel(Square square) {
 		Random randX = new Random();
 		Random randY = new Random();
+		
+        SquarePosition position = new SquarePosition(randX.nextInt(size.getY()), randY.nextInt(size.getX()));
+		
+		while (!(squares[position.getX()][position.getY()] instanceof EmptySquare)) {
+			position = new SquarePosition(randX.nextInt(size.getY()), randY.nextInt(size.getX()));	
+		}
+		
+		square.setPosition(position);
+        squares[position.getX()][position.getY()] = square;
+	}
+	
+	public static Level generateEmptyLevel(int level, Size size, int numPits) {
+		//TODO(WPH) - add pits
+//		Random randX = new Random();
+//		Random randY = new Random();
 		
 		Square[][] squares = new Square[size.getY()][size.getX()];
 		
@@ -86,16 +94,6 @@ public class Level implements WumpusEngineSendable{
 			}
 		}
 		
-		// Place Special Squares
-		SquarePosition wumpusPosition = new SquarePosition(randX.nextInt(size.getY()), randY.nextInt(size.getX()));
-        squares[wumpusPosition.getX()][wumpusPosition.getY()] = new WumpusSquare(wumpusPosition);
-		
-		SquarePosition goldPosition   = new SquarePosition(randX.nextInt(size.getY()), randY.nextInt(size.getX()));
-		while (goldPosition == wumpusPosition) {
-			goldPosition   = new SquarePosition(randX.nextInt(size.getY()), randY.nextInt(size.getX()));	
-		}
-		squares[goldPosition.getX()][goldPosition.getY()] = new GoldSquare(goldPosition);
-
 		Level randomLevel = new Level(level, size, squares);
 		
 		return randomLevel;
