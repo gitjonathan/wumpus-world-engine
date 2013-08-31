@@ -1,4 +1,5 @@
 import org.apache.activemq.ActiveMQConnectionFactory;
+import org.codehaus.jettison.json.JSONObject;
  
 import javax.jms.Connection;
 import javax.jms.DeliveryMode;
@@ -72,9 +73,10 @@ public class App {
                 MessageProducer producer = session.createProducer(destination);
                 producer.setDeliveryMode(DeliveryMode.NON_PERSISTENT);
  
-                // Create a messages
-                String text = "Hello world! From: " + Thread.currentThread().getName() + " : " + this.hashCode();
-                TextMessage message = session.createTextMessage(text);
+                // Create a message
+                JettisonJSONHelloWorld hello = new JettisonJSONHelloWorld("Hello JSON World!" + " - From: " + Thread.currentThread().getName() + " : " + this.hashCode());
+                JSONObject json = hello.toJSON();
+                TextMessage message = session.createTextMessage(json.toString());
  
                 // Tell the producer to send the message
                 System.out.println("Sent message: "+ message.hashCode() + " : " + Thread.currentThread().getName());
@@ -118,8 +120,14 @@ public class App {
  
                 if (message instanceof TextMessage) {
                     TextMessage textMessage = (TextMessage) message;
-                    String text = textMessage.getText();
-                    System.out.println("Received: " + text);
+                    JSONObject newJson = new JSONObject(textMessage.getText());
+                    if (newJson.has("type")) {
+                    	if (newJson.getString("type").compareTo("JettisonJSONHelloWorld") == 0) {
+                    		JettisonJSONHelloWorld newHw = new JettisonJSONHelloWorld();
+                    		newHw.fromJSON(newJson);
+                            System.out.println("Received: " + newHw.toString());
+                    	}
+                    }
                 } else {
                     System.out.println("Received: " + message);
                 }
