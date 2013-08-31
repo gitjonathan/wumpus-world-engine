@@ -6,11 +6,12 @@ import percept.Percept;
 import api.WumpusEngineSendable;
 
 public abstract class Square implements WumpusEngineSendable {
-	private SquarePosition     position;
-	private ArrayList<Percept> percepts;
+	private SquarePosition       position;
+	protected ArrayList<Percept> percepts;
 	
 	public Square(SquarePosition position) {
 		this.position = position;
+		percepts = new ArrayList<Percept>();
 	}
 	
 	public ArrayList<Percept> getPercepts() {
@@ -24,4 +25,14 @@ public abstract class Square implements WumpusEngineSendable {
 	public SquarePosition getPosition() {
 		return position;
 	}
+	
+	public String toString() {
+		String output = "";
+		for (Percept percept : percepts) {
+			output += percept.toString();
+		}
+		return output;
+	}
+	
+	abstract public Percept getGeneratedPercept();
 }

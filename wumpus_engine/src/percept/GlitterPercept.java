@@ -1,10 +1,9 @@
 package percept;
 
-public class BreezePercept extends Percept {
+public class GlitterPercept extends Percept {
 	
 	public String toString() {
-		String output = "B";
+		String output = "S";
 		return output;
 	}
-
 }

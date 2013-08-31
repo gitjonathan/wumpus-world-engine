@@ -1,19 +1,19 @@
 package board;
 
 public class Size {
-	private int width;
-	private int depth;
+	private int x;
+	private int y;
 
 	public Size(int width, int depth) {
-		this.width = width;
-		this.depth = depth;
+		this.x = width;
+		this.y = depth;
 	}
 	
-	public int getWidth() {
-		return width;
+	public int getX() {
+		return x;
 	}
 	
-	public int getDepth() {
-		return depth;
+	public int getY() {
+		return y;
 	}
 }
