@@ -2,7 +2,7 @@
 <classpath>
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="C:/Users/Bill/Documents/wumpus-world-engine/libs/activemq-all-5.9-SNAPSHOT.jar"/>
-	<classpathentry kind="lib" path="C:/Users/Bill/Documents/wumpus-world-engine/libs/jettison-1.3.4.jar"/>
+	<classpathentry kind="lib" path="/libs/activemq-all-5.9-SNAPSHOT.jar"/>
+	<classpathentry kind="lib" path="/libs/jettison-1.3.4.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
