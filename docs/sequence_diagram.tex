@@ -1,0 +1,32 @@
+\documentclass{article}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shadows}
+\usepackage{pgf-umlsd}
+ 
+\begin{document}
+ 
+\begin{sequencediagram}
+\newthread[white]{viewer}{Viewer}
+\newinst[2]{engine}{Engine}
+\newinst[2]{agent}{Agent}
+%\newinst[3]{b}{CdThread}
+%\newinst[3]{t}{EncodingThread}
+%\newinst[3]{p}{TTP}
+\begin{call}{viewer}{Initialize}{engine}{Ack}
+	
+	%\mess{viwer}{example}{engine}
+\end{call}
+\begin{call}{viewer}{Initialize}{agent}{Ack}
+\end{call}
+
+%DEPENDENCIES:
+%Download style sheet, pgf-umlsd.sty, at: https://code.google.com/p/pgf-umlsd/
+
+
+% mkdir /usr/share/texmf/tex/latex/common
+% cp pgf-umlsd.sty /usr/share/texmf/tex/latex/common
+% sudo mktexlsr
+
+\end{sequencediagram}
+ 
+\end{document}
